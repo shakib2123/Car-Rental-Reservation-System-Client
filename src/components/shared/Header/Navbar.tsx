@@ -2,6 +2,7 @@ import { routes } from "@/utils/Routes";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import { Button } from "@/components/ui/button";
+import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
   return (
@@ -11,8 +12,12 @@ const Navbar = () => {
         <Link to="/">
           <Logo />
         </Link>
+
+        {/* Mobile device menus */}
+        <MobileMenu />
+
         {/* Navigation menu */}
-        <div className="flex items-center gap-8">
+        <div className="md:flex items-center gap-8 hidden">
           {routes.map((route) => (
             <NavLink
               key={route.path}
