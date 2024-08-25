@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      boxShadow: {
+        "custom-light": "0 0 25px #262626",
+      },
       backgroundImage: {
         bannerBg: "url('./src/assets/images/banner-bg.jpg')",
       },
