@@ -115,7 +115,7 @@ const Footer = () => {
             <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
               {/* INFORMATION */}
               <div className="space-y-2">
-                <h3 className="font-semibold text-gray-200">INFORMATION</h3>
+                <h3 className="font-semibold text-gray-200">ABOUT</h3>
                 {/* Links */}
                 <div className="flex flex-col gap-2">
                   <Link className="text-gray-400 hover:underline" to="#">
@@ -154,7 +154,9 @@ const Footer = () => {
               </div>
               {/* RESOURCES */}
               <div className="space-y-2">
-                <h3 className="font-semibold text-gray-200">RESOURCES</h3>
+                <h3 className="font-semibold text-gray-200 uppercase">
+                  terms of service
+                </h3>
                 {/* Links */}
                 <div className="flex flex-col gap-2">
                   <Link className="text-gray-400 hover:underline" to="#">
@@ -173,7 +175,9 @@ const Footer = () => {
               </div>
               {/* SERVICES */}
               <div>
-                <h3 className="font-semibold text-gray-200">SERVICES</h3>
+                <h3 className="font-semibold text-gray-200">
+                  PRIVACY & POLICY
+                </h3>
                 {/* Links */}
                 <div className="flex flex-col gap-2">
                   <Link className="text-gray-400 hover:underline" to="#">
