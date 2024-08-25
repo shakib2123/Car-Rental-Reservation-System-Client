@@ -13,8 +13,8 @@ import { Button } from "@/components/ui/button";
 const Footer = () => {
   return (
     <section>
-      <div className="mt-28 bg-top bg-cover bg-no-repeat">
-        <div className="bg-black/85 h-full pt-8">
+      <div className="bg-top bg-cover bg-no-repeat">
+        <div className="bg-black h-full pt-8">
           <div className="max-w-7xl mx-auto px-3 lg:px-0">
             {/* Footer Top */}
             <div className=" border-b py-5 border-gray-400 space-y-8 lg:flex items-center justify-between gap-10">

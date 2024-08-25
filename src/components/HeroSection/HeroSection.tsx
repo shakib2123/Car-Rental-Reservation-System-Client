@@ -13,8 +13,8 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="h-[calc(100vh-70px)] bg-bannerBg bg-cover bg-no-repeat bg-center bg-black/50">
-      <div className="bg-black/50 h-full w-full flex items-center">
+    <section className="h-[calc(100vh-70px)] bg-bannerBg bg-cover bg-no-repeat bg-center">
+      <div className="bg-black/55 h-full w-full flex items-center">
         <div className="max-w-screen-xl mx-auto w-full space-y-5 px-3">
           <h2 className="text-4xl md:text-5xl font-semibold leading-snug md:leading-[60px]">
             Explore the Road Ahead <br /> with{" "}

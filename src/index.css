@@ -67,3 +67,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+.shadowGray {
+  box-shadow: 0 0 25px #262626;
+}
+
+.shadowGray:hover {
+  box-shadow: 0 0 5px #262626, 0 0 25px #262626, 0 0 50px #262626,
+    0 0 100px #262626;
+}

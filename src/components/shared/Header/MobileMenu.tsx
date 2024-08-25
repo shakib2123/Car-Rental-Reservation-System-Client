@@ -3,13 +3,13 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { routes } from "@/utils/Routes";
+
 import { Link, NavLink } from "react-router-dom";
 
 const MobileMenu = () => {
@@ -36,9 +36,8 @@ const MobileMenu = () => {
         </SheetTrigger>
         <SheetContent className="flex flex-col justify-between items-center">
           <SheetHeader className="w-full">
-            <h2 className="text-xl font-semibold text-gray-100 mb-4 pb-2 border-b">
-              Menu
-            </h2>
+            <SheetTitle className="text-xl mb-4 ">Menu</SheetTitle>
+
             <div className="flex flex-col space-y-2">
               {routes.map((route) => (
                 <SheetClose asChild key={route.path}>

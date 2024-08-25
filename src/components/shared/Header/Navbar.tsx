@@ -1,8 +1,8 @@
-import { routes } from "@/utils/Routes";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import { Button } from "@/components/ui/button";
 import MobileMenu from "./MobileMenu";
+import { routes } from "@/utils/Routes";
 
 const Navbar = () => {
   return (
