@@ -9,12 +9,12 @@ export const userSidebarRoutes = [
   },
   {
     name: "Booking Management",
-    path: "/user/dashboard/booking-management",
+    path: "/user/booking-management",
     icon: <MdBookmarks />,
   },
   {
     name: "Payment Management",
-    path: "/user/dashboard/payment-management",
+    path: "/user/payment-management",
     icon: <FaDollarSign />,
   },
 ];

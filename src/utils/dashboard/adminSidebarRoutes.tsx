@@ -11,22 +11,22 @@ export const adminSidebarRoutes = [
   },
   {
     name: "Manage Cars",
-    path: "/admin/dashboard/manage-cars",
+    path: "/admin/manage-cars",
     icon: <FaCarSide />,
   },
   {
     name: "Manage Bookings",
-    path: "/admin/dashboard/manage-bookings",
+    path: "/admin/manage-bookings",
     icon: <MdBookmarks />,
   },
   {
     name: "Manage Return Cars",
-    path: "/admin/dashboard/manage-return-cars",
+    path: "/admin/manage-return-cars",
     icon: <GiReturnArrow />,
   },
   {
     name: "User Management",
-    path: "/admin/dashboard/manage-users",
+    path: "/admin/manage-users",
     icon: <FaUsers />,
   },
 ];

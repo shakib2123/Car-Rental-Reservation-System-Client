@@ -249,7 +249,10 @@ const SignUp = () => {
               </p>
             )}
           </div>
-          <Button className="w-full bg-orange-500 hover:bg-orange-600">
+          <Button
+            type="submit"
+            className="w-full bg-orange-500 hover:bg-orange-600"
+          >
             Sign Up
           </Button>
           <div>

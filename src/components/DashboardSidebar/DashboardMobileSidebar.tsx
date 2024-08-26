@@ -49,9 +49,9 @@ const DashboardMobileSidebar = ({ sidebarType }: { sidebarType: string }) => {
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Dashboard</SheetTitle>
+            <SheetTitle className="mb-4">Dashboard</SheetTitle>
           </SheetHeader>
-          <div className="flex flex-col justify-between min-h-full">
+          <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col gap-4 py-8 border-t">
               {sidebarType === "admin"
                 ? adminSidebarRoutes.map((item) => (
