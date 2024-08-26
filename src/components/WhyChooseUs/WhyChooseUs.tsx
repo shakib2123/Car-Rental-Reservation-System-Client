@@ -25,7 +25,10 @@ const WhyChooseUs = () => {
       {/* items */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {whyChooseUsData?.map((item) => (
-          <div className="rounded-xl p-8 shadowGray transition-shadow duration-300 flex flex-col items-center justify-center gap-4">
+          <div
+            key={item.id}
+            className="rounded-xl p-8 shadowGray transition-shadow duration-300 flex flex-col items-center justify-center gap-4"
+          >
             <div className="text-5xl text-gray-100">{item.icon}</div>
             <h3 className="text-lg font-semibold">{item.title}</h3>
             <p className="text-gray-300 text-center">{item.description}</p>

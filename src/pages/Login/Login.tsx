@@ -39,16 +39,26 @@ const Login = () => {
       };
 
       const res = await login(userInfo).unwrap();
+      const { __v, updatedAt, createdAt, ...userData } = res.data;
 
       const user = verifyToken(res.token) as TUser;
 
-      dispatch(setUser({ user: user, token: res.token }));
-      toast.success("Logged in successfully", { id: toastId, duration: 2000 });
+      if (user) {
+        dispatch(setUser({ user: userData, token: res.token }));
+        toast.success("Logged in successfully", {
+          id: toastId,
+          duration: 2000,
+        });
 
-      navigate(`/${user?.role}/dashboard`);
+        navigate(`/${user?.role}/dashboard`);
+      } else {
+        toast.error("Invalid credentials", {
+          id: toastId,
+          duration: 2000,
+        });
+        return;
+      }
     } catch (err) {
-      console.log(err?.status);
-
       toast.error(err?.data?.message, {
         action: (
           <Button

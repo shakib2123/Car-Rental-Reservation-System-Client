@@ -8,13 +8,30 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  logout,
+  selectCurrentToken,
+  TUser,
+} from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { routes } from "@/utils/Routes";
+import { verifyToken } from "@/utils/verifyToken";
 
 import { Link, NavLink } from "react-router-dom";
 
 const MobileMenu = () => {
+  const dispatch = useAppDispatch();
+
+  const token = useAppSelector(selectCurrentToken);
+  let verifiedUser: TUser | null = null;
+
+  // Ensure the token is valid before trying to decode it
+  if (token) {
+    verifiedUser = verifyToken(token) as TUser;
+  }
+
   return (
-    <div className="block md:hidden">
+    <div className="block lg:hidden">
       <Sheet>
         <SheetTrigger>
           <Button className="text-xl font-medium bg-transparent p-0 bg-second hover:bg-second">
@@ -54,14 +71,35 @@ const MobileMenu = () => {
                   </NavLink>
                 </SheetClose>
               ))}
+              {verifiedUser?.email && (
+                <NavLink
+                  className={({ isActive }) =>
+                    `font-medium text-gray-100 hover:text-orange-500 uppercase p-2 border-b ${
+                      isActive && "text-orange-500"
+                    }`
+                  }
+                  to={`/${verifiedUser?.role}/dashboard`}
+                >
+                  Dashboard
+                </NavLink>
+              )}
             </div>
           </SheetHeader>
           <SheetFooter className=" w-full">
-            <Link to="/login">
-              <Button className="text-gray-100 w-full bg-orange-500 hover:bg-orange-600">
-                LOGIN
+            {!verifiedUser?.email ? (
+              <Link to="/login" className="w-full">
+                <Button className="text-gray-100  w-full bg-orange-500 hover:bg-orange-600">
+                  LOGIN
+                </Button>
+              </Link>
+            ) : (
+              <Button
+                onClick={() => dispatch(logout())}
+                className="text-gray-100  w-full bg-orange-500 hover:bg-orange-600"
+              >
+                LOGOUT
               </Button>
-            </Link>
+            )}
           </SheetFooter>
         </SheetContent>
       </Sheet>
