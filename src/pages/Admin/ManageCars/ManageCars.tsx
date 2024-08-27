@@ -4,19 +4,58 @@ import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetAllCarsQuery } from "@/redux/features/car/carApi";
+import {
+  useDeleteCarMutation,
+  useGetAllCarsQuery,
+} from "@/redux/features/car/carApi";
+import { TCar } from "@/types/Car.type";
 import { Link } from "react-router-dom";
+
+import Swal from "sweetalert2";
 
 const ManageCars = () => {
   const { data: carData, isLoading } = useGetAllCarsQuery(undefined);
-  console.log("carData", carData);
+
+  console.log(carData);
+
+  const [deleteCar] = useDeleteCarMutation();
+
+  const handleDelete = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).then(async (result: any) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await deleteCar(id).unwrap();
+          if (res?.success) {
+            Swal.fire({
+              title: "Deleted!",
+              text: res?.message,
+              icon: "success",
+            });
+          }
+        } catch (err) {
+          Swal.fire({
+            text: err?.message,
+            icon: "error",
+            title: "Oops...",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <section className="lg:flex gap-8 ">
@@ -57,7 +96,7 @@ const ManageCars = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {carData?.data?.map((car) => (
+            {carData?.data?.map((car: TCar) => (
               <TableRow key={car?.name}>
                 <TableCell>
                   <img
@@ -92,7 +131,7 @@ const ManageCars = () => {
                   </Link>
 
                   <Button
-                    // onClick={() => handleDelete(item._id)}
+                    onClick={() => handleDelete(car?._id)}
                     variant={"destructive"}
                   >
                     <svg
