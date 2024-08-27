@@ -24,7 +24,7 @@ const ManageCars = () => {
         <DashboardSidebar sidebarType="admin" />
         <DashboardNavbar sidebarType="admin" />
       </div>
-      <div className="lg:p-8 text-white max-w-screen-xl mx-auto">
+      <div className="lg:p-8 text-white max-w-screen-xl mx-auto my-8 px-3">
         <Link to="/admin/create-car">
           <Button className="bg-orange-500 hover:bg-orange-600">
             <svg
@@ -72,7 +72,7 @@ const ManageCars = () => {
                 <TableCell className="text-sm">{car?.features}</TableCell>
                 <TableCell className="text-sm">{car?.pricePerHour}</TableCell>
                 <TableCell className="text-right  flex flex-col lg:flex-row items-center gap-2 ">
-                  <Link to={`/update-cars/${car?._id}`}>
+                  <Link to={`/admin/update-car/${car?._id}`}>
                     <Button className="bg-blue-500 hover:bg-blue-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

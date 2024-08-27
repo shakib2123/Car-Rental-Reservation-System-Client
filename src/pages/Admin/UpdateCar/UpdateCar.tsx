@@ -10,36 +10,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { useCreateCarMutation } from "@/redux/features/car/carApi";
-import { useAppSelector } from "@/redux/hook";
+import {
+  useGetSingleCarQuery,
+  useUpdateCarMutation,
+} from "@/redux/features/car/carApi";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
-
-export type TFormData = {
-  name: string;
-  model: string;
-  year: string;
-  features: string;
-  pricePerHour: number;
-  image: string;
-  description: string;
-  isElectric: string;
-  location: string;
-  color: string;
-};
+import { TFormData } from "../CreateCar/CreateCar";
 
 const apiKey = import.meta.env.VITE_IMAGEBB_API_KEY;
 const url = `https://api.imgbb.com/1/upload?key=${apiKey}`;
 
-const CreateCar = () => {
+const UpdateCar = () => {
+  const { id } = useParams();
+
+  const { data: car } = useGetSingleCarQuery(id);
+
   const [loading, setLoading] = useState(false);
 
-  const user = useAppSelector(selectCurrentUser);
-
-  const [createCar, { isLoading }] = useCreateCarMutation();
+  const [updateCar, { isLoading }] = useUpdateCarMutation();
 
   const navigate = useNavigate();
 
@@ -49,6 +40,7 @@ const CreateCar = () => {
     control,
     formState: { errors },
   } = useForm<TFormData>();
+
   const onSubmit: SubmitHandler<TFormData> = async (data) => {
     const formData = new FormData();
     formData.append("image", data.image[0]);
@@ -61,7 +53,7 @@ const CreateCar = () => {
     const imgData = await response.json();
 
     setLoading(false);
-    const toastId = toast.loading("Creating...");
+    const toastId = toast.loading("Updating...");
 
     const carData = {
       name: data.name,
@@ -74,12 +66,15 @@ const CreateCar = () => {
       isElectric: Boolean(data.isElectric),
       location: data.location,
       color: data.color,
-      ownerEmail: user?.email,
-      ownerName: user?.name,
+    };
+
+    const updatedData = {
+      id: car?.data?._id,
+      data: carData,
     };
 
     try {
-      const res = await createCar(carData);
+      const res = await updateCar(updatedData);
 
       if (res.data?.success) {
         toast.success(res?.data?.message, { id: toastId });
@@ -98,7 +93,7 @@ const CreateCar = () => {
         </div>
 
         <h3 className="text-2xl font-semibold text-gray-100 text-center mb-8">
-          Create a new car!
+          Update car information!
         </h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
@@ -107,6 +102,7 @@ const CreateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="name">Name:</Label>
                 <Input
+                  defaultValue={car?.data?.name}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="name"
@@ -122,6 +118,7 @@ const CreateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="model">Model:</Label>
                 <Input
+                  defaultValue={car?.data?.model}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="model"
@@ -140,6 +137,7 @@ const CreateCar = () => {
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="year"
+                  defaultValue={car?.data?.year}
                   {...register("year", { required: true })}
                 />
               </div>
@@ -152,6 +150,7 @@ const CreateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="features">Features:</Label>
                 <Input
+                  defaultValue={car?.data?.features[0]}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="features"
@@ -167,6 +166,7 @@ const CreateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="pricePerHour">Price per hour:</Label>
                 <Input
+                  defaultValue={car?.data?.pricePerHour}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="number"
                   id="pricePerHour"
@@ -199,6 +199,7 @@ const CreateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="description">Description:</Label>
                 <Input
+                  defaultValue={car?.data?.description}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="description"
@@ -241,6 +242,7 @@ const CreateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="location">Location:</Label>
                 <Input
+                  defaultValue={car?.data?.location}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="location"
@@ -256,6 +258,7 @@ const CreateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="color">Color:</Label>
                 <Input
+                  defaultValue={car?.data?.color}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="color"
@@ -272,7 +275,7 @@ const CreateCar = () => {
             disabled={loading || isLoading}
             className="w-full bg-orange-500 hover:bg-orange-600 mt-6"
           >
-            {loading || isLoading ? "Loading..." : "Add Car"}
+            {loading || isLoading ? "Loading..." : "Update Car"}
           </Button>
         </form>
       </div>
@@ -280,4 +283,4 @@ const CreateCar = () => {
   );
 };
 
-export default CreateCar;
+export default UpdateCar;
