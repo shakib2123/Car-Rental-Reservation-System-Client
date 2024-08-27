@@ -9,21 +9,70 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  useDeleteCarMutation,
-  useGetAllCarsQuery,
-} from "@/redux/features/car/carApi";
-import { TCar } from "@/types/Car.type";
-import { Link } from "react-router-dom";
 
+import {
+  useDeleteUserMutation,
+  useGetAllUserQuery,
+  useUpdateRoleMutation,
+} from "@/redux/features/user/userApi";
+import { TUser } from "@/types/user.type";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const ManageCars = () => {
-  const { data: carData, isLoading } = useGetAllCarsQuery(undefined);
+const UserManagement = () => {
+  const { data: userData } = useGetAllUserQuery(undefined);
 
-  console.log(carData);
+  const [updateRole] = useUpdateRoleMutation();
 
-  const [deleteCar] = useDeleteCarMutation();
+  const [deleteUser] = useDeleteUserMutation();
+
+  const handleRole = (id: string, role: string) => {
+    let newRole;
+
+    if (role === "admin") {
+      newRole = "user";
+    } else {
+      newRole = "admin";
+    }
+
+    const userInfo = {
+      id,
+      role: newRole,
+    };
+
+    console.log(role);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, change the role!",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).then(async (result: any) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await updateRole(userInfo).unwrap();
+          console.log(res);
+          if (res?.success) {
+            Swal.fire({
+              title: "Changed!",
+              text: res?.message,
+              icon: "success",
+            });
+          }
+        } catch (err) {
+          Swal.fire({
+            text: "Failed to change role",
+            icon: "error",
+            title: "Oops...",
+          });
+        }
+      }
+    });
+  };
 
   const handleDelete = (id: string) => {
     Swal.fire({
@@ -38,7 +87,7 @@ const ManageCars = () => {
     }).then(async (result: any) => {
       if (result.isConfirmed) {
         try {
-          const res = await deleteCar(id).unwrap();
+          const res = await deleteUser(id).unwrap();
           if (res?.success) {
             Swal.fire({
               title: "Deleted!",
@@ -64,61 +113,39 @@ const ManageCars = () => {
         <DashboardNavbar sidebarType="admin" />
       </div>
       <div className="lg:p-8 text-white max-w-screen-xl mx-auto my-8 px-3">
-        <Link to="/admin/create-car">
+        <Link to="/sign-up">
           <Button className="bg-orange-500 hover:bg-orange-600">
-            Add A New Car
+            Add A New User
           </Button>
         </Link>
-        <Table className="p-12 min-w-[880px] md:w-full">
+        <Table className="p-12 min-w-[700px] md:w-full">
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Image</TableHead>
               <TableHead>Name</TableHead>
-              <TableHead>Model</TableHead>
-              <TableHead>Year</TableHead>
-              <TableHead>Features</TableHead>
-              <TableHead>Price Per Hour</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Phone</TableHead>
+              <TableHead className="text-right">Role</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {carData?.data?.map((car: TCar) => (
-              <TableRow key={car?._id}>
-                <TableCell>
-                  <img
-                    className="object-cover rounded-lg size-14"
-                    src={car?.image}
-                    alt={car?.model}
-                  />
-                </TableCell>
-                <TableCell className="text-sm">{car?.name}</TableCell>
-                <TableCell className="text-sm">{car?.model}</TableCell>
-                <TableCell className="text-sm">{car?.year}</TableCell>
-                <TableCell className="text-sm">{car?.features}</TableCell>
-                <TableCell className="text-sm">{car?.pricePerHour}</TableCell>
-                <TableCell className="text-right  flex flex-col lg:flex-row items-center gap-2 ">
-                  <Link to={`/admin/update-car/${car?._id}`}>
-                    <Button className="bg-blue-500 hover:bg-blue-600">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="size-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                        />
-                      </svg>
-                    </Button>
-                  </Link>
+            {userData?.data?.map((user: TUser) => (
+              <TableRow key={user?._id}>
+                <TableCell className="text-sm">{user?.name}</TableCell>
+                <TableCell className="text-sm">{user?.email}</TableCell>
+                <TableCell className="text-sm">{user?.phone}</TableCell>
 
+                <TableCell className="text-right  flex flex-col lg:flex-row items-center gap-2 ">
                   <Button
-                    onClick={() => handleDelete(car?._id)}
+                    onClick={() => handleRole(user?._id, user?.role)}
+                    variant="outline"
+                    className="text-orange-500 hover:text-orange-600"
+                  >
+                    Change to {user?.role === "admin" ? "user" : "admin"}
+                  </Button>
+                  <Button
+                    onClick={() => handleDelete(user?._id)}
                     variant={"destructive"}
+                    className="hover:bg-red-500"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -145,4 +172,4 @@ const ManageCars = () => {
   );
 };
 
-export default ManageCars;
+export default UserManagement;

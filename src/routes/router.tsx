@@ -2,6 +2,7 @@ import App from "@/App";
 import CreateCar from "@/pages/Admin/CreateCar/CreateCar";
 import ManageCars from "@/pages/Admin/ManageCars/ManageCars";
 import UpdateCar from "@/pages/Admin/UpdateCar/UpdateCar";
+import UserManagement from "@/pages/Admin/UserManagement/UserManagement";
 import AdminDashboard from "@/pages/Dashboard/AdminDashboard";
 import UserDashboard from "@/pages/Dashboard/UserDashboard";
 import Home from "@/pages/Home/Home";
@@ -52,5 +53,9 @@ export const router: ReturnType<typeof createBrowserRouter> =
     {
       path: "/admin/update-car/:id",
       element: <UpdateCar />,
+    },
+    {
+      path: "/admin/manage-users",
+      element: <UserManagement />,
     },
   ]);
