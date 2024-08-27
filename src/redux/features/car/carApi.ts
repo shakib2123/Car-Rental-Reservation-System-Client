@@ -2,6 +2,12 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const carApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getAllCars: builder.query({
+      query: () => ({
+        url: "/cars",
+        method: "GET",
+      }),
+    }),
     createCar: builder.mutation({
       query: (carData) => ({
         url: "/cars",
@@ -12,4 +18,4 @@ const carApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateCarMutation } = carApi;
+export const { useGetAllCarsQuery, useCreateCarMutation } = carApi;

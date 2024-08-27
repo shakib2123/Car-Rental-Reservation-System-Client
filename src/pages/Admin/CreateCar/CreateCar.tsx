@@ -26,7 +26,7 @@ type Inputs = {
   pricePerHour: number;
   image: string;
   description: string;
-  isElectric: boolean;
+  isElectric: string;
   location: string;
   color: string;
 };
@@ -61,7 +61,7 @@ const CreateCar = () => {
     const imgData = await response.json();
 
     setLoading(false);
-    const toastId = toast.loading("Signing in...");
+    const toastId = toast.loading("Creating...");
 
     const carData = {
       name: data.name,
@@ -80,8 +80,6 @@ const CreateCar = () => {
 
     try {
       const res = await createCar(carData);
-      console.log(res);
-      console.log(res.data?.success);
 
       if (res.data?.success) {
         toast.success(res?.data?.message, { id: toastId });
