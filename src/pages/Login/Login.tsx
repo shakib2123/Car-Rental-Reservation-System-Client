@@ -50,7 +50,7 @@ const Login = () => {
           duration: 2000,
         });
 
-        navigate(`/${user?.role}/dashboard`);
+        navigate(`/${user?.role}/dashboard`, { replace: true });
       } else {
         toast.error("Invalid credentials", {
           id: toastId,

@@ -1,21 +1,19 @@
 import DashboardNavbar from "@/components/DashboardNavbar/DashboardNavbar";
 import DashboardSidebar from "@/components/DashboardSidebar/DashboardSidebar";
+import { Outlet } from "react-router-dom";
 
-const AdminDashboard = () => {
+const AdminLayout = () => {
   return (
     <section className="lg:flex gap-8 ">
-      <div className="">
+      <div className="lg:sticky lg:top-0 lg:left-0 lg:h-screen">
         <DashboardSidebar sidebarType="admin" />
         <DashboardNavbar sidebarType="admin" />
       </div>
       <div className="lg:p-8 text-white max-w-screen-xl mx-auto">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore, amet
-        nisi facere ducimus distinctio porro inventore dolorum debitis natus
-        quae voluptates dicta modi, beatae illum, minus eum est numquam
-        corrupti!
+        <Outlet />
       </div>
     </section>
   );
 };
 
-export default AdminDashboard;
+export default AdminLayout;
