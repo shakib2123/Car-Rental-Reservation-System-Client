@@ -27,8 +27,10 @@ export type TFormData = {
   image: string;
   description: string;
   isElectric: string;
+  carType: string;
   location: string;
   color: string;
+  seatCapacity: string;
 };
 
 const apiKey = import.meta.env.VITE_IMAGEBB_API_KEY;
@@ -50,6 +52,7 @@ const CreateCar = () => {
     formState: { errors },
   } = useForm<TFormData>();
   const onSubmit: SubmitHandler<TFormData> = async (data) => {
+    console.log(data);
     const formData = new FormData();
     formData.append("image", data.image[0]);
     setLoading(true);
@@ -59,6 +62,7 @@ const CreateCar = () => {
     });
 
     const imgData = await response.json();
+    console.log(imgData);
 
     setLoading(false);
     const toastId = toast.loading("Creating...");
@@ -72,11 +76,15 @@ const CreateCar = () => {
       image: imgData.data.url,
       description: data.description,
       isElectric: Boolean(data.isElectric),
+      carType: data.carType,
       location: data.location,
       color: data.color,
+      seatCapacity: Number(data.seatCapacity),
       ownerEmail: user?.email,
       ownerName: user?.name,
     };
+
+    console.log(carData);
 
     try {
       const res = await createCar(carData);
@@ -236,6 +244,35 @@ const CreateCar = () => {
                 <p className="text-red-500 text-sm">Is Electric is required</p>
               )}
             </div>
+            {/* car type */}
+            <div>
+              <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor="isElectric">Car Type:</Label>
+                <Controller
+                  name="carType"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="md:w-80 focus-visible:ring-offset-0">
+                        <SelectValue placeholder="Select a option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value={"hybrid"}>Hybrid</SelectItem>
+                          <SelectItem value={"sedan"}>Sedan</SelectItem>
+                          <SelectItem value={"SUV"}>SUV</SelectItem>
+                          <SelectItem value={"sports"}>Sports</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+              {errors?.carType && (
+                <p className="text-red-500 text-sm">Car Type is required</p>
+              )}
+            </div>
             {/* Location */}
             <div>
               <div className="grid w-full items-center gap-1.5">
@@ -266,10 +303,27 @@ const CreateCar = () => {
                 <p className="text-red-500 text-sm">Color is required</p>
               )}
             </div>
+            {/* Seat Capacity */}
+            <div>
+              <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor="seatCapacity">Seat Capacity:</Label>
+                <Input
+                  className="md:w-80 focus-visible:ring-offset-0"
+                  type="number"
+                  id="seatCapacity"
+                  {...register("seatCapacity", { required: true })}
+                />
+              </div>
+              {errors?.seatCapacity && (
+                <p className="text-red-500 text-sm">
+                  Seat Capacity is required
+                </p>
+              )}
+            </div>
           </div>
           <Button
             type="submit"
-            disabled={loading || isLoading}
+            // disabled={loading || isLoading}
             className="w-full bg-orange-500 hover:bg-orange-600 mt-6"
           >
             {loading || isLoading ? "Loading..." : "Add Car"}
