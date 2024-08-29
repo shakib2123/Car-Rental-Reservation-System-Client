@@ -18,6 +18,8 @@ import ManageBookings from "@/pages/Admin/ManageBookings/ManageBookings";
 import ManageReturnsCar from "@/pages/Admin/ManageReturnsCar/ManageReturnsCar";
 import BookingManagement from "@/pages/User/BookingManagement/BookingManagement";
 import PaymentManagement from "@/pages/User/PaymentManagement/PaymentManagement";
+import CarDetails from "@/pages/CarDetails/CarDetails";
+import CarListing from "@/pages/CarListing/CarListing";
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -33,6 +35,14 @@ export const router: ReturnType<typeof createBrowserRouter> =
         {
           path: "booking",
           element: <BookingPage />,
+        },
+        {
+          path: "car-details/:id",
+          element: <CarDetails />,
+        },
+        {
+          path: "car-lists",
+          element: <CarListing />,
         },
       ],
     },

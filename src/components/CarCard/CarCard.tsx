@@ -3,7 +3,20 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { IoIosWarning } from "react-icons/io";
 
-const CarCard = ({ car }: { car: TCar }) => {
+type TCardData = {
+  car: TCar;
+  cardType: string;
+};
+
+const CarCard = ({ car, cardType }: TCardData) => {
+  let route;
+
+  if (cardType === "booking") {
+    route = `/booking/${car?._id}`;
+  } else {
+    route = `/car-details/${car?._id}`;
+  }
+
   return (
     <div className="h-full rounded-lg shadowGray p-2 hover:scale-[1.01] transition-all duration-300 flex flex-col">
       <div className="flex-grow">
@@ -32,9 +45,9 @@ const CarCard = ({ car }: { car: TCar }) => {
           </p>
         </div>
 
-        <Link to={`/car-details/${car?._id}`}>
+        <Link to={route}>
           <Button className="w-full bg-orange-500 hover:bg-orange-600">
-            See Details
+            {cardType === "booking" ? "Book Now" : "View Details"}
           </Button>
         </Link>
       </div>
