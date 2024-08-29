@@ -49,7 +49,7 @@ const CarDetails = () => {
     setCursorPosition({ x: cursorX, y: cursorY });
   };
 
-  const handleBooking = (id: string) => {
+  const handleBooking = () => {
     const bookingData = {
       insurance,
       GPS,
@@ -57,7 +57,7 @@ const CarDetails = () => {
     };
 
     dispatch(setOptions(bookingData));
-    navigate(`/booking/${id}`);
+    navigate(`/booking`);
   };
 
   return (
