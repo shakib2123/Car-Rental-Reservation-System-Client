@@ -15,7 +15,7 @@ businesses.
 
 ## 🔗 Live URL
 
-[Campers Shop](https://gearshift.vercel.app/)
+[Gearshift](https://gearshift.vercel.app/)
 
 ## 📝 Project Description
 
