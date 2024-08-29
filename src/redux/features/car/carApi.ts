@@ -3,10 +3,28 @@ import { baseApi } from "@/redux/api/baseApi";
 const carApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllCars: builder.query({
-      query: () => ({
-        url: "/cars",
-        method: "GET",
-      }),
+      query: (query) => {
+        const params = new URLSearchParams();
+
+        if (query?.searchValue) {
+          params.append("searchValue", query.searchValue);
+        }
+        if (query?.carType) {
+          params.append("carType", query.carType);
+        }
+        if (query?.minPrice) {
+          params.append("minPrice", query.minPrice);
+        }
+
+        if (query?.maxPrice) {
+          params.append("maxPrice", query.maxPrice);
+        }
+
+        return {
+          url: `/cars?${params.toString()}`,
+          method: "GET",
+        };
+      },
       providesTags: ["cars"],
     }),
     getSingleCar: builder.query({
