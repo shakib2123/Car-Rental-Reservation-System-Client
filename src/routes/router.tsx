@@ -20,6 +20,7 @@ import BookingManagement from "@/pages/User/BookingManagement/BookingManagement"
 import PaymentManagement from "@/pages/User/PaymentManagement/PaymentManagement";
 import CarDetails from "@/pages/CarDetails/CarDetails";
 import CarListing from "@/pages/CarListing/CarListing";
+import BookingForm from "@/pages/BookingForm/BookingForm";
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -35,6 +36,10 @@ export const router: ReturnType<typeof createBrowserRouter> =
         {
           path: "booking",
           element: <BookingPage />,
+        },
+        {
+          path: "booking-form/:id",
+          element: <BookingForm />,
         },
         {
           path: "car-details/:id",

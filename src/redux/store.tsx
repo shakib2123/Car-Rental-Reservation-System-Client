@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "./api/baseApi";
 import authReducer from "./features/auth/authSlice";
 import carReducer from "./features/car/carSlice";
+import bookingReducer from "./features/booking/bookingSlice";
 
 import { persistStore, persistReducer } from "redux-persist";
 
@@ -19,6 +20,7 @@ export const store = configureStore({
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistedAuthReducer,
     car: carReducer,
+    booking: bookingReducer,
   },
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares().concat(baseApi.middleware),

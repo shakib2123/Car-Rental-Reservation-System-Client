@@ -20,7 +20,6 @@ const CarDetails = () => {
   const { id } = useParams();
 
   const { data: carData, isLoading } = useGetSingleCarQuery(id);
-  console.log(carData);
 
   const dispatch = useAppDispatch();
 
@@ -239,9 +238,21 @@ const CarDetails = () => {
             )}
           </h3>
         </div>
+        {/* cancelation policy */}
+        <div className="py-4 border-y space-y-4">
+          <h3 className="text-xl font-semibold text-gray-100 mb-1">
+            Cancelation policy:
+          </h3>
+          <p className="text-gray-300 p-4 bg-second w-full rounded-xl">
+            You can cancel your booking free of charge up to 24 hours before
+            pick-up. Cancellations within 24 hours may incur a fee. No refunds
+            for no-shows or early returns. Changes to your booking may affect
+            the cancellation terms.
+          </p>
+        </div>
 
         <Button
-          onClick={() => handleBooking(carData?.data?._id)}
+          onClick={() => handleBooking()}
           disabled={carData?.data?.status !== "available"}
           className="w-full  bg-orange-500 hover:bg-orange-600 mt-4"
         >

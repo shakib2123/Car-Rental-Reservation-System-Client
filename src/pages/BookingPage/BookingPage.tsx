@@ -17,16 +17,16 @@ import {
 } from "@/components/ui/select";
 
 import { useGetAllCarsQuery } from "@/redux/features/car/carApi";
-import { useAppSelector } from "@/redux/hook";
+
 import { TCar } from "@/types/Car.type";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const BookingPage = () => {
-  const { searchValue: searchValueFromState } = useAppSelector(
-    (state) => state.car
-  );
-  const [searchValue, setSearchValue] = useState(searchValueFromState);
+  const searchParams = new URLSearchParams(location.search);
+  const searchableValue = searchParams.get("searchValue");
+
+  const [searchValue, setSearchValue] = useState(searchableValue || "");
   const [carType, setCarType] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");

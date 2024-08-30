@@ -4,14 +4,12 @@ export type TOptions = {
   insurance: string | null;
   GPS: boolean | null;
   childSeat: boolean | null;
-  searchValue: string;
 };
 
 const initialState: TOptions = {
   insurance: null,
   GPS: null,
   childSeat: null,
-  searchValue: "",
 };
 
 const carSlice = createSlice({
@@ -29,12 +27,9 @@ const carSlice = createSlice({
       state.GPS = null;
       state.childSeat = null;
     },
-    setSearchValue: (state, action) => {
-      state.searchValue = action.payload;
-    },
   },
 });
 
-export const { resetOptions, setOptions, setSearchValue } = carSlice.actions;
+export const { resetOptions, setOptions } = carSlice.actions;
 
 export default carSlice.reducer;

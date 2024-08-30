@@ -1,23 +1,20 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { useGetAllCarsQuery } from "@/redux/features/car/carApi";
+
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "@/redux/hook";
-import { setSearchValue } from "@/redux/features/car/carSlice";
 
 type Inputs = {
   searchValue: string;
 };
 
 const HeroSection = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatch(setSearchValue(data.searchValue));
-    navigate("/booking");
+    const params = new URLSearchParams({ searchValue: data.searchValue });
+    navigate(`/booking?${params.toString()}`);
   };
 
   return (

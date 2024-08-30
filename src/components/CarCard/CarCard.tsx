@@ -12,7 +12,7 @@ const CarCard = ({ car, cardType }: TCardData) => {
   let route;
 
   if (cardType === "booking") {
-    route = `/booking/${car?._id}`;
+    route = `/booking-form/${car?._id}`;
   } else {
     route = `/car-details/${car?._id}`;
   }
