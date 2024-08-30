@@ -23,6 +23,8 @@ import CarListing from "@/pages/CarListing/CarListing";
 import BookingForm from "@/pages/BookingForm/BookingForm";
 import BookingConfirmation from "@/pages/BookingConfirmation/BookingConfirmation";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
+import ForgetPassword from "@/pages/ForgetPassword/ForgetPassword";
+import ChangePassword from "@/pages/ChangePassword/ChangePassword";
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -64,6 +66,14 @@ export const router: ReturnType<typeof createBrowserRouter> =
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/forget-password",
+      element: <ForgetPassword />,
+    },
+    {
+      path: "/reset-password",
+      element: <ChangePassword />,
     },
 
     // User dashboard routes
