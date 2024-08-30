@@ -31,6 +31,7 @@ export type TFormData = {
   location: string;
   color: string;
   seatCapacity: string;
+  date: string;
 };
 
 const apiKey = import.meta.env.VITE_IMAGEBB_API_KEY;
@@ -62,7 +63,6 @@ const CreateCar = () => {
     });
 
     const imgData = await response.json();
-    console.log(imgData);
 
     setLoading(false);
     const toastId = toast.loading("Creating...");
@@ -80,6 +80,7 @@ const CreateCar = () => {
       location: data.location,
       color: data.color,
       seatCapacity: Number(data.seatCapacity),
+      date: data.date,
       ownerEmail: user?.email,
       ownerName: user?.name,
     };
@@ -318,6 +319,21 @@ const CreateCar = () => {
                 <p className="text-red-500 text-sm">
                   Seat Capacity is required
                 </p>
+              )}
+            </div>
+            {/* Date */}
+            <div>
+              <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor="date">Date:</Label>
+                <Input
+                  className="md:w-80 focus-visible:ring-offset-0"
+                  type="date"
+                  id="date"
+                  {...register("date", { required: true })}
+                />
+              </div>
+              {errors?.date && (
+                <p className="text-red-500 text-sm">Date is required</p>
               )}
             </div>
           </div>

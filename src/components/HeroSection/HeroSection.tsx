@@ -1,15 +1,23 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { useGetAllCarsQuery } from "@/redux/features/car/carApi";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/redux/hook";
+import { setSearchValue } from "@/redux/features/car/carSlice";
 
 type Inputs = {
   searchValue: string;
 };
 
 const HeroSection = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    dispatch(setSearchValue(data.searchValue));
+    navigate("/booking");
   };
 
   return (
@@ -26,9 +34,11 @@ const HeroSection = () => {
             options, and exceptional service. Your journey starts here!
           </p>
           <div className="flex items-center gap-4">
-            <Button className="w-40 h-12 bg-orange-500 hover:bg-orange-600">
-              Book Now
-            </Button>
+            <Link to="/booking">
+              <Button className="w-40 h-12 bg-orange-500 hover:bg-orange-600">
+                Book Now
+              </Button>
+            </Link>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex w-full max-w-sm items-center"

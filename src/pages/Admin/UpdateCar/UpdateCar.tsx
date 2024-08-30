@@ -64,8 +64,11 @@ const UpdateCar = () => {
       image: imgData.data.url,
       description: data.description,
       isElectric: Boolean(data.isElectric),
+      carType: data.carType,
       location: data.location,
+      date: data.date,
       color: data.color,
+      seatCapacity: Number(data.seatCapacity),
     };
 
     const updatedData = {
@@ -102,7 +105,6 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="name">Name:</Label>
                 <Input
-                  defaultValue={car?.data?.name}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="name"
@@ -118,7 +120,6 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="model">Model:</Label>
                 <Input
-                  defaultValue={car?.data?.model}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="model"
@@ -137,7 +138,6 @@ const UpdateCar = () => {
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="year"
-                  defaultValue={car?.data?.year}
                   {...register("year", { required: true })}
                 />
               </div>
@@ -150,7 +150,6 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="features">Features:</Label>
                 <Input
-                  defaultValue={car?.data?.features[0]}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="features"
@@ -166,7 +165,6 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="pricePerHour">Price per hour:</Label>
                 <Input
-                  defaultValue={car?.data?.pricePerHour}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="number"
                   id="pricePerHour"
@@ -199,7 +197,6 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="description">Description:</Label>
                 <Input
-                  defaultValue={car?.data?.description}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="description"
@@ -237,13 +234,42 @@ const UpdateCar = () => {
                 <p className="text-red-500 text-sm">Is Electric is required</p>
               )}
             </div>
+            {/* car type */}
+            <div>
+              <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor="isElectric">Car Type:</Label>
+                <Controller
+                  name="carType"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="md:w-80 focus-visible:ring-offset-0">
+                        <SelectValue placeholder="Select a option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value={"hybrid"}>Hybrid</SelectItem>
+                          <SelectItem value={"sedan"}>Sedan</SelectItem>
+                          <SelectItem value={"SUV"}>SUV</SelectItem>
+                          <SelectItem value={"sports"}>Sports</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+              {errors?.carType && (
+                <p className="text-red-500 text-sm">Car Type is required</p>
+              )}
+            </div>
             {/* Location */}
             <div>
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="location">Location:</Label>
                 <Input
-                  defaultValue={car?.data?.location}
                   className="md:w-80 focus-visible:ring-offset-0"
+                  defaultValue={car?.data?.location}
                   type="text"
                   id="location"
                   {...register("location", { required: true })}
@@ -258,8 +284,8 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="color">Color:</Label>
                 <Input
-                  defaultValue={car?.data?.color}
                   className="md:w-80 focus-visible:ring-offset-0"
+                  defaultValue={car?.data?.color}
                   type="text"
                   id="color"
                   {...register("color", { required: true })}
@@ -267,6 +293,42 @@ const UpdateCar = () => {
               </div>
               {errors?.color && (
                 <p className="text-red-500 text-sm">Color is required</p>
+              )}
+            </div>
+            {/* Seat Capacity */}
+            <div>
+              <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor="seatCapacity">Seat Capacity:</Label>
+                <Input
+                  className="md:w-80 focus-visible:ring-offset-0"
+                  defaultValue={car?.data?.seatCapacity}
+                  type="number"
+                  id="seatCapacity"
+                  {...register("seatCapacity", { required: true })}
+                />
+              </div>
+              {errors?.seatCapacity && (
+                <p className="text-red-500 text-sm">
+                  Seat Capacity is required
+                </p>
+              )}
+            </div>
+            {/* Date */}
+            <div>
+              <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor="date">Date:</Label>
+                <Input
+                  className="md:w-80 focus-visible:ring-offset-0"
+                  defaultValue={car?.data?.date}
+                  type="date"
+                  id="date"
+                  {...register("date", { required: true })}
+                />
+              </div>
+              {errors?.date && (
+                <p className="text-red-500 text-sm">
+                  Seat Capacity is required
+                </p>
               )}
             </div>
           </div>
