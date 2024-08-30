@@ -7,7 +7,6 @@ type TBooking = {
   creditCard: number | null;
   drivingLicense: string | null;
   passport: string | null;
-  userEmail: string | null;
 };
 
 const initialState: TBooking = {
@@ -17,7 +16,6 @@ const initialState: TBooking = {
   creditCard: null,
   drivingLicense: null,
   passport: null,
-  userEmail: null,
 };
 
 const bookingSlice = createSlice({
@@ -25,15 +23,8 @@ const bookingSlice = createSlice({
   initialState,
   reducers: {
     setBooking: (state, action) => {
-      const {
-        GPS,
-        car,
-        childSeat,
-        creditCard,
-        drivingLicense,
-        passport,
-        userEmail,
-      } = action.payload;
+      const { GPS, car, childSeat, creditCard, drivingLicense, passport } =
+        action.payload;
 
       state.GPS = GPS;
       state.car = car;
@@ -41,7 +32,6 @@ const bookingSlice = createSlice({
       state.creditCard = creditCard;
       state.drivingLicense = drivingLicense;
       state.passport = passport;
-      state.userEmail = userEmail;
     },
     resetBooking: (state) => {
       state.GPS = null;
@@ -50,7 +40,6 @@ const bookingSlice = createSlice({
       state.creditCard = null;
       state.drivingLicense = null;
       state.passport = null;
-      state.userEmail = null;
     },
   },
 });

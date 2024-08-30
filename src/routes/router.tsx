@@ -21,13 +21,15 @@ import PaymentManagement from "@/pages/User/PaymentManagement/PaymentManagement"
 import CarDetails from "@/pages/CarDetails/CarDetails";
 import CarListing from "@/pages/CarListing/CarListing";
 import BookingForm from "@/pages/BookingForm/BookingForm";
+import BookingConfirmation from "@/pages/BookingConfirmation/BookingConfirmation";
+import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
     {
       path: "/",
       element: <App />,
-      //   errorElement: <NotFound />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -40,6 +42,10 @@ export const router: ReturnType<typeof createBrowserRouter> =
         {
           path: "booking-form/:id",
           element: <BookingForm />,
+        },
+        {
+          path: "booking-confirmation/:id",
+          element: <BookingConfirmation />,
         },
         {
           path: "car-details/:id",

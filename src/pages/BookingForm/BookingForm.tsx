@@ -10,9 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { setBooking } from "@/redux/features/booking/bookingSlice";
-import { useAppSelector } from "@/redux/hook";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -24,6 +22,7 @@ type TBookingForm = {
   creditCard: number;
   GPS: string;
   childSeat: string;
+  date: string;
 };
 
 const apiKey = import.meta.env.VITE_IMAGEBB_API_KEY;
@@ -33,8 +32,6 @@ const BookingForm = () => {
   const { id: carId } = useParams();
 
   const [loading, setLoading] = useState(false);
-
-  const user = useAppSelector(selectCurrentUser);
 
   const dispatch = useDispatch();
 
@@ -73,7 +70,6 @@ const BookingForm = () => {
       creditCard: data?.creditCard,
       GPS: data?.GPS === "true",
       childSeat: data?.childSeat === "true",
-      userEmail: user?._id,
       car: carId,
     };
     console.log(bookingData);
@@ -124,6 +120,21 @@ const BookingForm = () => {
                 <p className="text-red-500 text-sm">
                   Driving License is required
                 </p>
+              )}
+            </div>
+            {/* Date */}
+            <div>
+              <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor="date">Date:</Label>
+                <Input
+                  className="md:w-80 focus-visible:ring-offset-0"
+                  type="date"
+                  id="date"
+                  {...register("date", { required: true })}
+                />
+              </div>
+              {errors?.date && (
+                <p className="text-red-500 text-sm">Date is required</p>
               )}
             </div>
             {/* Credit Card */}
