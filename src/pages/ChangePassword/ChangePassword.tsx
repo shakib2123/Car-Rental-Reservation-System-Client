@@ -16,6 +16,7 @@ const ChangePassword = () => {
 
   // Extract specific query parameters
   const token = searchParams.get("token");
+  const id = searchParams.get("id");
   const [isLinkSent, setIsLinkSent] = useState(false);
 
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
@@ -32,6 +33,7 @@ const ChangePassword = () => {
     if (token) {
       const res = await resetPassword({
         email: data.email,
+        id,
         token,
         newPassword: data.newPassword,
       });
@@ -40,8 +42,6 @@ const ChangePassword = () => {
         setIsLinkSent(true);
         navigate("/login");
       }
-    } else {
-      console.error("Token is missing!");
     }
   };
 
@@ -82,7 +82,7 @@ const ChangePassword = () => {
           type="submit"
           className="w-full bg-orange-500 hover:bg-orange-600 mt-6"
         >
-          {/* {isLoading ? "Loading..." : "Submit"} */}
+          {isLoading ? "Loading..." : "Submit"}
         </Button>
       </form>
     </section>
