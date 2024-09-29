@@ -53,7 +53,6 @@ const CreateCar = () => {
     formState: { errors },
   } = useForm<TFormData>();
   const onSubmit: SubmitHandler<TFormData> = async (data) => {
-    console.log(data);
     const formData = new FormData();
     formData.append("image", data.image[0]);
     setLoading(true);
@@ -85,8 +84,6 @@ const CreateCar = () => {
       ownerName: user?.name,
     };
 
-    console.log(carData);
-
     try {
       const res = await createCar(carData);
 
@@ -94,19 +91,19 @@ const CreateCar = () => {
         toast.success(res?.data?.message, { id: toastId });
         navigate("/admin/manage-cars");
       }
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err?.data?.message, { id: toastId });
     }
   };
 
   return (
-    <section className="max-w-screen-xl mx-auto min-h-screen flex items-center justify-center px-3 py-8">
+    <section className="max-w-screen-xl mx-auto min-h-screen flex items-center justify-center px-3 py-8 text-gray-900 dark:text-gray-100">
       <div className="shadow-custom-light p-8 rounded-xl">
         <div className="max-w-8 mx-auto flex items-center justify-center mb-6">
-          <Logo />
+          <Logo isDark={true} />
         </div>
 
-        <h3 className="text-2xl font-semibold text-gray-100 text-center mb-8">
+        <h3 className="text-2xl font-semibold text-center mb-8">
           Create a new car!
         </h3>
         <form onSubmit={handleSubmit(onSubmit)}>

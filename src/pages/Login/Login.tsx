@@ -39,7 +39,7 @@ const Login = () => {
       };
 
       const res = await login(userInfo).unwrap();
-      const { __v, updatedAt, createdAt, ...userData } = res.data;
+      const { __v, updatedAt, createdAt, isDeleted, ...userData } = res.data;
 
       const user = verifyToken(res.token) as TUser;
 
@@ -58,7 +58,7 @@ const Login = () => {
         });
         return;
       }
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err?.data?.message, {
         action: (
           <Button
@@ -75,7 +75,7 @@ const Login = () => {
   };
 
   return (
-    <section className="bg-black min-h-screen flex items-center justify-center my-14">
+    <section className="bg-black min-h-screen flex items-center justify-center py-14 text-gray-100 ">
       <div className="rounded-xl shadow-custom-light shadow-gray-600 p-6 md:py-8">
         <div className="max-w-8 mx-auto flex items-center justify-center mb-6">
           <Logo />
@@ -83,12 +83,12 @@ const Login = () => {
         <h2 className="text-gray-100 text-2xl font-semibold text-center mb-8">
           Sign In to your account!
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
           <div>
             <div className="grid w-full items-center gap-1.5">
               <Label htmlFor="email">Email:</Label>
               <Input
-                className="md:w-80 focus-visible:ring-offset-0"
+                className="md:w-80 focus-visible:ring-offset-0 text-gray-900 dark:text-gray-100"
                 type="email"
                 id="email"
                 {...register("email", { required: true })}
@@ -103,14 +103,14 @@ const Login = () => {
             <div className="grid w-full items-center gap-1.5 relative">
               <Label htmlFor="password">Password:</Label>
               <Input
-                className="md:w-80 focus-visible:ring-offset-0"
+                className="md:w-80 focus-visible:ring-offset-0 text-gray-900 dark:text-gray-100"
                 type={`${isShowPassword ? "text" : "password"}`}
                 id="password"
                 {...register("password", { required: true })}
               />
               <p
                 onClick={() => setIsShowPassword(!isShowPassword)}
-                className="absolute right-2 top-[67%] -translate-y-1/2 text-gray-100 cursor-pointer p-1 "
+                className="absolute right-2 top-[67%] -translate-y-1/2 text-gray-900 dark:text-gray-100 cursor-pointer p-1 "
               >
                 {isShowPassword ? <IoEye /> : <IoEyeOff />}
               </p>
@@ -137,13 +137,13 @@ const Login = () => {
                 Sign Up Free!
               </Link>
             </p>
-            <p>
+            <p className="text-gray-100">
               Read our{" "}
               <Link to="/privacy-policy" className="text-orange-500">
                 Privacy Policy
               </Link>{" "}
               and{" "}
-              <Link to="/terms-and-condition" className="text-orange-500">
+              <Link to="/terms-and-conditions" className="text-orange-500">
                 Terms of Service
               </Link>
             </p>

@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-import logo from "../../../assets/images/logo.png";
+import logo from "@/assets/images/logo.png";
 
-import visa from "../../../assets/images/footer/visa.svg";
-import shopPay from "../../../assets/images/footer/shop-pay.svg";
-import paypal from "../../../assets/images/footer/paypal.svg";
-import mastercard from "../../../assets/images/footer/mastercard.svg";
+import visa from "../../../assets/images/Footer/visa.svg";
+import shopPay from "../../../assets/images/Footer/shop-pay.svg";
+import paypal from "../../../assets/images/Footer/paypal.svg";
+import mastercard from "../../../assets/images/Footer/mastercard.svg";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -159,8 +159,11 @@ const Footer = () => {
                 </h3>
                 {/* Links */}
                 <div className="flex flex-col gap-2">
-                  <Link className="text-gray-400 hover:underline" to="#">
-                    Shipping Rates
+                  <Link
+                    className="text-gray-400 hover:underline"
+                    to="/terms-and-conditions"
+                  >
+                    Terms and conditions
                   </Link>
                   <Link className="text-gray-400 hover:underline" to="#">
                     Returns & Exchanges
@@ -180,8 +183,11 @@ const Footer = () => {
                 </h3>
                 {/* Links */}
                 <div className="flex flex-col gap-2">
-                  <Link className="text-gray-400 hover:underline" to="#">
-                    Helps
+                  <Link
+                    className="text-gray-400 hover:underline"
+                    to="/privacy-policy"
+                  >
+                    Privacy & policy
                   </Link>
                   <Link className="text-gray-400 hover:underline" to="#">
                     Return Policy
@@ -210,7 +216,7 @@ const Footer = () => {
                 src={logo}
                 alt="mountain-image"
               />
-              <h2 className="font-bold text-lg md:text-xl lg:text-3xl uppercase">
+              <h2 className="font-bold text-lg md:text-xl lg:text-3xl text-gray-100 uppercase">
                 Gearshift
               </h2>
             </Link>
@@ -218,7 +224,7 @@ const Footer = () => {
             <div className="hidden lg:block h-12 w-[1px] border-r border-gray-400"></div>
             <p className="text-gray-400 text-sm md:text-base">
               Copyright &copy; 2024{" "}
-              <span className="font-bold text-white">Gearshift</span>, All
+              <span className="font-bold text-gray-100">Gearshift</span>, All
               Rights Reserved.
             </p>
           </div>

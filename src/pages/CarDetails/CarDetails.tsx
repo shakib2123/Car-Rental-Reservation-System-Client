@@ -19,7 +19,7 @@ import { setOptions } from "@/redux/features/car/carSlice";
 const CarDetails = () => {
   const { id } = useParams();
 
-  const { data: carData, isLoading } = useGetSingleCarQuery(id);
+  const { data: carData } = useGetSingleCarQuery(id);
 
   const dispatch = useAppDispatch();
 
@@ -99,7 +99,7 @@ const CarDetails = () => {
           </div>
         </div>
         <div className="py-4 border-b-2 border-gray-800  space-y-2">
-          <h2 className="text-3xl font-semibold text-gray-100">
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-100">
             {carData?.data?.name}
           </h2>
 
@@ -112,12 +112,14 @@ const CarDetails = () => {
               / per hour <IoIosWarning />
             </span>
           </h3>
-          <p className="text-gray-300">{carData?.data?.description}</p>
+          <p className="text-gray-700 dark:text-gray-300">
+            {carData?.data?.description}
+          </p>
         </div>
         <div className="py-4 ">
           {/* features */}
           <div>
-            <h3 className="text-xl font-semibold text-gray-100 mb-1">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
               Features:
             </h3>
             {carData?.data?.features?.[0].split(",").map((feature: string) => (
@@ -131,35 +133,35 @@ const CarDetails = () => {
         </div>
         {/* Specifications */}
         <div className="py-4 border-y space-y-4">
-          <h3 className="text-xl font-semibold text-gray-100 mb-1">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
             Specifications:
           </h3>
-          <p className="text-gray-300 p-4 bg-second flex items-center justify-between w-full rounded-xl">
+          <p className="text-gray-700 dark:text-gray-300 p-4 bg-second/10 dark:bg-second flex items-center justify-between w-full rounded-xl">
             Name <span>{carData?.data?.name}</span>
           </p>
-          <p className="text-gray-300 p-4 bg-second flex items-center justify-between w-full rounded-xl">
+          <p className="text-gray-700 dark:text-gray-300 p-4 bg-second/10 dark:bg-second flex items-center justify-between w-full rounded-xl">
             Model <span>{carData?.data?.model}</span>
           </p>
-          <p className="text-gray-300 p-4 bg-second flex items-center justify-between w-full rounded-xl">
+          <p className="text-gray-700 dark:text-gray-300 p-4 bg-second/10 dark:bg-second flex items-center justify-between w-full rounded-xl">
             Color <span>{carData?.data?.color}</span>
           </p>
-          <p className="text-gray-300 p-4 bg-second flex items-center justify-between w-full rounded-xl">
+          <p className="text-gray-700 dark:text-gray-300 p-4 bg-second/10 dark:bg-second flex items-center justify-between w-full rounded-xl">
             Fuel{" "}
             <span>
               {carData?.data?.isElectric ? "Electric" : "Non-electric"}
             </span>
           </p>
-          <p className="text-gray-300 p-4 bg-second flex items-center justify-between w-full rounded-xl">
+          <p className="text-gray-700 dark:text-gray-300 p-4 bg-second/10 dark:bg-second flex items-center justify-between w-full rounded-xl">
             Year <span>{carData?.data?.year}</span>
           </p>
-          <p className="text-gray-300 p-4 bg-second flex items-center justify-between w-full rounded-xl">
+          <p className="text-gray-700 dark:text-gray-300 p-4 bg-second/10 dark:bg-second flex items-center justify-between w-full rounded-xl">
             Location <span>{carData?.data?.location}</span>
           </p>
         </div>
 
         {/* Options to choose additional features */}
         <div className="py-4 border-y">
-          <h3 className="text-xl font-semibold text-gray-100 mb-3">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">
             Choose additional options:
           </h3>
           {/* choose insurance option */}
@@ -229,7 +231,7 @@ const CarDetails = () => {
 
         {/* availability */}
         <div className="pt-4 ">
-          <h3 className="text-xl font-semibold text-gray-100 mb-1">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
             Availability:{" "}
             {carData?.data?.status === "available" ? (
               <span className="text-green-500">Available</span>
@@ -240,10 +242,10 @@ const CarDetails = () => {
         </div>
         {/* cancelation policy */}
         <div className="py-4 border-y space-y-4">
-          <h3 className="text-xl font-semibold text-gray-100 mb-1">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
             Cancelation policy:
           </h3>
-          <p className="text-gray-300 p-4 bg-second w-full rounded-xl">
+          <p className="text-gray-700 dark:text-gray-300 p-4 bg-second/10 dark:bg-second w-full rounded-xl">
             You can cancel your booking free of charge up to 24 hours before
             pick-up. Cancellations within 24 hours may incur a fee. No refunds
             for no-shows or early returns. Changes to your booking may affect

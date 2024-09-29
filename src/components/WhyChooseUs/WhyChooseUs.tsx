@@ -13,11 +13,11 @@ const WhyChooseUs = () => {
         </p>
         <h2
           data-aos="fade-up"
-          className="text-3xl md:text-4xl text-gray-100 font-bold text-center font-young-serif"
+          className="text-3xl md:text-4xl text-gray-900 dark:text-gray-100 font-bold text-center font-young-serif"
         >
           Why Choose Us?
         </h2>
-        <p data-aos="fade-up" className="text-gray-300">
+        <p data-aos="fade-up" className=" text-gray-700 dark:text-gray-300">
           Discover unbeatable rates, a wide vehicle selection, and 24/7 support
           for a seamless car rental experience.
         </p>
@@ -29,9 +29,13 @@ const WhyChooseUs = () => {
             key={item.id}
             className="rounded-xl p-8 shadowGray transition-shadow duration-300 flex flex-col items-center justify-center gap-4"
           >
-            <div className="text-5xl text-gray-100">{item.icon}</div>
+            <div className="text-5xl text-gray-700 dark:text-gray-100">
+              {item.icon}
+            </div>
             <h3 className="text-lg font-semibold">{item.title}</h3>
-            <p className="text-gray-300 text-center">{item.description}</p>
+            <p className="text-gray-700 dark:text-gray-300 text-center">
+              {item.description}
+            </p>
           </div>
         ))}
       </div>

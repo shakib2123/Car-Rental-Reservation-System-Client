@@ -30,7 +30,9 @@ const CarCard = ({ car, cardType }: TCardData) => {
       </div>
       <div className="flex flex-col gap-5 px-1 mt-4">
         <div className="space-y-1">
-          <h3 className="text-lg text-gray-100 ">{car?.name}</h3>
+          <h3 className="text-lg text-gray-900 dark:text-gray-100 ">
+            {car?.name}
+          </h3>
 
           <h3 className="text-orange-500 flex items-center gap-1">
             USD
@@ -39,7 +41,10 @@ const CarCard = ({ car, cardType }: TCardData) => {
               / per hour <IoIosWarning />
             </span>
           </h3>
-          <p title={car?.description}>
+          <p
+            title={car?.description}
+            className="text-gray-700 dark:text-gray-300"
+          >
             {car?.description.slice(0, 150)}
             {car?.description.length > 150 ? "..." : ""}
           </p>

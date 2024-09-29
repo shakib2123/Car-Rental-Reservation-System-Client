@@ -16,7 +16,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
-type TBookingForm = {
+export type TBookingForm = {
   passport: string;
   drivingLicense: string;
   creditCard: number;
@@ -68,11 +68,11 @@ const BookingForm = () => {
       passport: imgData.data.url,
       drivingLicense: data?.drivingLicense,
       creditCard: data?.creditCard,
+      date: data?.date,
       GPS: data?.GPS === "true",
       childSeat: data?.childSeat === "true",
       car: carId,
     };
-    console.log(bookingData);
 
     dispatch(setBooking(bookingData));
     navigate(`/booking-confirmation/${carId}`);
@@ -81,11 +81,11 @@ const BookingForm = () => {
   return (
     <section className="max-w-screen-xl mx-auto min-h-screen flex items-center justify-center px-3 py-8">
       <div className="shadow-custom-light p-8 rounded-xl">
-        <div className="max-w-8 mx-auto flex items-center justify-center mb-6">
-          <Logo />
+        <div className="max-w-8 mx-auto flex items-center justify-center mb-6 text-gray-900 dark:text-gray-100">
+          <Logo isDark={true} />
         </div>
 
-        <h3 className="text-2xl font-semibold text-gray-100 text-center mb-8">
+        <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 text-center mb-8">
           Book a car!
         </h3>
         <form onSubmit={handleSubmit(onSubmit)}>

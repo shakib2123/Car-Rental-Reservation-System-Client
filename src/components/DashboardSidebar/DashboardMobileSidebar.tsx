@@ -12,6 +12,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { userSidebarRoutes } from "@/utils/dashboard/userSidebarRoutes";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import ThemeSwitcher from "@/utils/ThemeSwitcher";
 
 const DashboardMobileSidebar = ({ sidebarType }: { sidebarType: string }) => {
   const user = useAppSelector(selectCurrentUser);
@@ -58,9 +59,9 @@ const DashboardMobileSidebar = ({ sidebarType }: { sidebarType: string }) => {
                     <SheetClose asChild key={item.path}>
                       <NavLink
                         className={({ isActive }) =>
-                          `text-gray-100 hover:text-orange-500 p-2 flex gap-3 items-center text-lg rounded-xl ${
+                          `text-gray-900 dark:text-gray-100 hover:text-orange-500 p-2 flex gap-3 items-center text-lg rounded-xl ${
                             isActive &&
-                            "text-orange-500 border-l-4 border-orange-500"
+                            "text-orange-500 dark:bg-orange-600 border-l-4 border-orange-500"
                           }`
                         }
                         to={item.path}
@@ -75,9 +76,9 @@ const DashboardMobileSidebar = ({ sidebarType }: { sidebarType: string }) => {
                       <NavLink
                         key={item.path}
                         className={({ isActive }) =>
-                          `text-gray-100 hover:text-orange-500 p-2 flex gap-3 items-center text-lg rounded-xl ${
+                          `text-gray-900 dark:text-gray-100 hover:text-orange-500 p-2 flex gap-3 items-center text-lg rounded-xl ${
                             isActive &&
-                            "text-orange-500 border-l-4 border-orange-500"
+                            "text-orange-500  border-l-4 border-orange-500"
                           }`
                         }
                         to={item.path}
@@ -95,23 +96,32 @@ const DashboardMobileSidebar = ({ sidebarType }: { sidebarType: string }) => {
                   {profileText}
                 </h2>
                 <div className="">
-                  <p className="text-gray-100 font-medium" title={user?.name}>
+                  <p
+                    className="text-gray-900 dark:text-gray-100 font-medium"
+                    title={user?.name}
+                  >
                     {user?.name?.slice(0, 15)}
                     {(user?.name?.length ?? 0) > 15 && "..."}
                   </p>
-                  <p className="text-gray-300 text-sm" title={user?.email}>
+                  <p
+                    className="text-gray-700 dark:text-gray-300 text-sm"
+                    title={user?.email}
+                  >
                     {user?.email.slice(0, 20)}
                     {(user?.email?.length ?? 0) > 20 && "..."}
                   </p>
                 </div>
               </div>
-              {/* Logout */}
-              <Button
-                onClick={handleLogout}
-                className="text-gray-100 bg-orange-500 hover:bg-orange-600 w-full"
-              >
-                LOGOUT
-              </Button>
+              <div className="flex items-center gap-4">
+                {/* Logout */}
+                <Button
+                  onClick={handleLogout}
+                  className="text-gray-100 bg-orange-500 hover:bg-orange-600 w-full"
+                >
+                  LOGOUT
+                </Button>
+                <ThemeSwitcher />
+              </div>
             </div>
           </div>
         </SheetContent>

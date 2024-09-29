@@ -92,11 +92,11 @@ const Testimonial = () => {
         </p>
         <h2
           data-aos="fade-up"
-          className="text-3xl md:text-4xl text-gray-100 font-bold text-center font-young-serif"
+          className="text-3xl md:text-4xl text-gray-900 dark:text-gray-100 font-bold text-center font-young-serif"
         >
           What Our Customers Are Saying.
         </h2>
-        <p data-aos="fade-up" className="text-gray-300">
+        <p data-aos="fade-up" className="text-gray-700 dark:text-gray-300">
           We let our work speak for itself. Here are some of the testimonials
           from our clients.
         </p>
@@ -126,7 +126,9 @@ const Testimonial = () => {
                               itemStyles={ratingStyles}
                             />
 
-                            <p className="text-gray-200">{item.description}</p>
+                            <p className="text-gray-700 dark:text-gray-300">
+                              {item.description}
+                            </p>
                           </div>
                           <div className=" flex items-center gap-3">
                             <img
@@ -138,7 +140,9 @@ const Testimonial = () => {
                               <p className="text-orange-500 font-semibold">
                                 {item.name}
                               </p>
-                              <p className="text-gray-200">{item.job}</p>
+                              <p className="text-gray-700 dark:text-gray-300">
+                                {item.job}
+                              </p>
                             </div>
                           </div>
                         </div>

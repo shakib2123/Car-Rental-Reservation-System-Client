@@ -7,8 +7,6 @@ export type TUser = {
   _id?: string;
   email: string;
   role: string;
-  iat?: number;
-  exp?: number;
 };
 
 type TAuthState = {
@@ -28,7 +26,7 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       const { user, token } = action.payload;
       state.user = user;
-      state.token = token;
+      state.token = token && token;
     },
     logout: (state) => {
       state.user = null;

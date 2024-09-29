@@ -9,13 +9,21 @@ const userApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
+    updateUser: build.mutation({
+      query: (data) => {
+        return {
+          url: `/users/${data?.id}`,
+          method: "PUT",
+          body: data?.userInfo,
+        };
+      },
+    }),
     updateRole: build.mutation({
       query: (data) => {
-        console.log("data from api", data.role);
         return {
-          url: `/users/${data.id}`,
+          url: `/users/${data?.id}`,
           method: "PATCH",
-          body: { role: data.role },
+          body: { role: data?.role },
         };
       },
       invalidatesTags: ["users"],
@@ -33,6 +41,7 @@ const userApi = baseApi.injectEndpoints({
 
 export const {
   useGetAllUserQuery,
+  useUpdateUserMutation,
   useUpdateRoleMutation,
   useDeleteUserMutation,
 } = userApi;

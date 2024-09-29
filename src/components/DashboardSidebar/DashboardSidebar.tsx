@@ -5,6 +5,7 @@ import { userSidebarRoutes } from "@/utils/dashboard/userSidebarRoutes";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { Button } from "../ui/button";
+import ThemeSwitcher from "@/utils/ThemeSwitcher";
 
 const DashboardSidebar = ({ sidebarType }: { sidebarType: string }) => {
   const user = useAppSelector(selectCurrentUser);
@@ -23,7 +24,7 @@ const DashboardSidebar = ({ sidebarType }: { sidebarType: string }) => {
     <div className="w-[320px] px-4 py-8 border-r h-screen overflow-y-auto hidden lg:block">
       {/* Logo */}
       <div className="max-w-[160px] pb-4">
-        <Logo />
+        <Logo isDark={true} />
       </div>
       <div className="flex flex-col justify-between h-full">
         {/* routes */}
@@ -33,8 +34,9 @@ const DashboardSidebar = ({ sidebarType }: { sidebarType: string }) => {
                 <NavLink
                   key={item.path}
                   className={({ isActive }) =>
-                    `text-gray-100 hover:text-orange-500 p-2 flex gap-3 items-center text-lg rounded-xl ${
-                      isActive && "text-orange-500 border-l-4 border-orange-500"
+                    `text-gray-900 dark:text-gray-100 hover:text-orange-500 p-2 flex gap-3 items-center text-lg rounded-xl ${
+                      isActive &&
+                      "text-orange-500 dark:text-orange-500 border-l-4 border-orange-500"
                     }`
                   }
                   to={item.path}
@@ -47,7 +49,7 @@ const DashboardSidebar = ({ sidebarType }: { sidebarType: string }) => {
                 <NavLink
                   key={item.path}
                   className={({ isActive }) =>
-                    `text-gray-100 hover:text-orange-500 p-2 flex gap-3 items-center text-lg rounded-xl ${
+                    `text-gray-900 dark:text-gray-100 hover:text-orange-500 p-2 flex gap-3 items-center text-lg rounded-xl ${
                       isActive && "text-orange-500 border-l-4 border-orange-500"
                     }`
                   }
@@ -66,23 +68,32 @@ const DashboardSidebar = ({ sidebarType }: { sidebarType: string }) => {
               {profileText}
             </h2>
             <div className="">
-              <p className="text-gray-100 font-medium" title={user?.name}>
+              <p
+                className="text-gray-900 dark:text-gray-100 font-medium"
+                title={user?.name}
+              >
                 {user?.name?.slice(0, 15)}
                 {(user?.name?.length ?? 0) > 15 && "..."}
               </p>
-              <p className="text-gray-300 text-sm" title={user?.email}>
+              <p
+                className="text-gray-700 dark:text-gray-300 text-sm"
+                title={user?.email}
+              >
                 {user?.email.slice(0, 20)}
                 {(user?.email?.length ?? 0) > 20 && "..."}
               </p>
             </div>
           </div>
-          {/* Logout */}
-          <Button
-            onClick={handleLogout}
-            className="text-gray-100 bg-orange-500 hover:bg-orange-600 w-full"
-          >
-            LOGOUT
-          </Button>
+          <div className="flex items-center gap-4">
+            {/* Logout */}
+            <Button
+              onClick={handleLogout}
+              className="text-gray-100 bg-orange-500 hover:bg-orange-600 w-full"
+            >
+              LOGOUT
+            </Button>
+            <ThemeSwitcher />
+          </div>
         </div>
       </div>
     </div>

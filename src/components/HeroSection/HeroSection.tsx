@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import bannerImage from "../../assets/images/banner-bg.jpg";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -18,10 +19,13 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="h-[calc(100vh-70px)] bg-bannerBg bg-cover bg-no-repeat bg-center">
+    <section
+      style={{ backgroundImage: `url(${bannerImage})` }}
+      className="h-[calc(100vh-70px)] bg-cover bg-no-repeat bg-center"
+    >
       <div className="bg-black/55 h-full w-full flex items-center">
         <div className="max-w-screen-xl mx-auto w-full space-y-5 px-3">
-          <h2 className="text-4xl md:text-5xl font-semibold leading-snug md:leading-[60px]">
+          <h2 className="text-4xl text-gray-100 md:text-5xl font-semibold leading-snug md:leading-[60px]">
             Explore the Road Ahead <br /> with{" "}
             <span className="text-orange-500">GearShift</span> Rentals
           </h2>

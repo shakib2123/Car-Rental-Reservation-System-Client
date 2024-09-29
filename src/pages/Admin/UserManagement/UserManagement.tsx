@@ -14,7 +14,7 @@ import {
   useUpdateRoleMutation,
 } from "@/redux/features/user/userApi";
 import { TUser } from "@/types/user.type";
-import { Link } from "react-router-dom";
+
 import Swal from "sweetalert2";
 
 const UserManagement = () => {
@@ -38,8 +38,6 @@ const UserManagement = () => {
       role: newRole,
     };
 
-    console.log(role);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -53,7 +51,7 @@ const UserManagement = () => {
       if (result.isConfirmed) {
         try {
           const res = await updateRole(userInfo).unwrap();
-          console.log(res);
+
           if (res?.success) {
             Swal.fire({
               title: "Changed!",
@@ -93,7 +91,7 @@ const UserManagement = () => {
               icon: "success",
             });
           }
-        } catch (err) {
+        } catch (err: any) {
           Swal.fire({
             text: err?.message,
             icon: "error",
@@ -105,12 +103,7 @@ const UserManagement = () => {
   };
 
   return (
-    <div className="lg:p-8 text-white max-w-screen-xl mx-auto my-8 px-3">
-      <Link to="/sign-up">
-        <Button className="bg-orange-500 hover:bg-orange-600">
-          Add A New User
-        </Button>
-      </Link>
+    <div className="lg:p-8 text-gray-900 dark:text-white max-w-screen-xl mx-auto my-8 px-3">
       <Table className="p-12 min-w-[700px] md:w-full">
         <TableHeader>
           <TableRow>

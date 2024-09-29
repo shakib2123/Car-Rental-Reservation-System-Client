@@ -2,20 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import Logo from "@/components/shared/Logo/Logo";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { toast } from "sonner";
 import { useSignUpMutation } from "@/redux/features/auth/authApi";
 
@@ -25,11 +17,15 @@ type Inputs = {
   password: string;
   confirmPassword: string;
   phone: string;
-  role: string;
   terms: boolean;
 };
+
+interface IErrorData {
+  message: string;
+}
+
 const SignUp = () => {
-  const [signUp, { isLoading }] = useSignUpMutation();
+  const [signUp] = useSignUpMutation();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isConfirmShowPassword, setIsConfirmShowPassword] = useState(false);
 
@@ -39,7 +35,6 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (data.password !== data.confirmPassword) {
@@ -51,7 +46,6 @@ const SignUp = () => {
       email: data.email,
       password: data.password,
       phone: data.phone,
-      role: data.role,
     };
 
     const res = await signUp(userData);
@@ -59,13 +53,14 @@ const SignUp = () => {
     if (res?.data?.success) {
       toast.success("Registered Successfully!");
       navigate("/login");
-    } else if (res?.error?.data?.success === false) {
-      toast.error(res?.error?.data?.message);
+    } else if (res?.error && "data" in res.error) {
+      const errorData = res.error.data as IErrorData;
+      toast.error(errorData.message);
     }
   };
 
   return (
-    <section className="bg-black min-h-screen flex items-center justify-center my-14">
+    <section className="bg-black min-h-screen flex items-center justify-center py-14 text-gray-100">
       <div className="rounded-xl shadow-custom-light shadow-gray-600 p-6 md:py-8">
         <div className="max-w-8 mx-auto flex items-center justify-center mb-6">
           <Logo />
@@ -75,13 +70,15 @@ const SignUp = () => {
         </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4 w-full max-w-[370xp]"
+          className="space-y-4 w-full max-w-[370xp] text-gray-900 dark:text-gray-100"
         >
           <div className="">
             <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="name">Name:</Label>
+              <Label className="text-gray-100" htmlFor="name">
+                Name:
+              </Label>
               <Input
-                className="md:w-80 focus-visible:ring-offset-0"
+                className="md:w-80 focus-visible:ring-offset-0 "
                 type="text"
                 id="name"
                 {...register("name", { required: true })}
@@ -93,9 +90,11 @@ const SignUp = () => {
           </div>
           <div>
             <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="email">Email:</Label>
+              <Label className="text-gray-100" htmlFor="email">
+                Email:
+              </Label>
               <Input
-                className="md:w-80 focus-visible:ring-offset-0"
+                className="md:w-80 focus-visible:ring-offset-0 "
                 type="email"
                 id="email"
                 {...register("email", { required: true })}
@@ -108,9 +107,11 @@ const SignUp = () => {
 
           <div>
             <div className="grid w-full items-center gap-1.5 relative">
-              <Label htmlFor="password">Password:</Label>
+              <Label className="text-gray-100" htmlFor="password">
+                Password:
+              </Label>
               <Input
-                className="md:w-80 focus-visible:ring-offset-0"
+                className="md:w-80 focus-visible:ring-offset-0 "
                 type={`${isShowPassword ? "text" : "password"}`}
                 id="password"
                 {...register("password", {
@@ -132,7 +133,7 @@ const SignUp = () => {
               />
               <p
                 onClick={() => setIsShowPassword(!isShowPassword)}
-                className="absolute right-2 top-[67%] -translate-y-1/2 text-gray-100 cursor-pointer p-1 "
+                className="absolute right-2 top-[67%] -translate-y-1/2 text-gray-900 dark:text-gray-100 cursor-pointer p-1 "
               >
                 {isShowPassword ? <IoEye /> : <IoEyeOff />}
               </p>
@@ -146,9 +147,11 @@ const SignUp = () => {
           {/* Confirm password */}
           <div>
             <div className="grid w-full items-center gap-1.5 relative">
-              <Label htmlFor="confirmPassword">Confirm Password:</Label>
+              <Label className="text-gray-100" htmlFor="confirmPassword">
+                Confirm Password:
+              </Label>
               <Input
-                className="md:w-80 focus-visible:ring-offset-0"
+                className="md:w-80 focus-visible:ring-offset-0 "
                 type={`${isConfirmShowPassword ? "text" : "password"}`}
                 id="confirmPassword"
                 {...register("confirmPassword", {
@@ -170,7 +173,7 @@ const SignUp = () => {
               />
               <p
                 onClick={() => setIsConfirmShowPassword(!isConfirmShowPassword)}
-                className="absolute right-2 top-[67%] -translate-y-1/2 text-gray-100 cursor-pointer p-1 "
+                className="absolute right-2 top-[67%] -translate-y-1/2 text-gray-900 dark:text-gray-100 cursor-pointer p-1 "
               >
                 {isConfirmShowPassword ? <IoEye /> : <IoEyeOff />}
               </p>
@@ -183,9 +186,11 @@ const SignUp = () => {
           </div>
           <div>
             <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="phone">Phone:</Label>
+              <Label className="text-gray-100" htmlFor="phone">
+                Phone:
+              </Label>
               <Input
-                className="md:w-80 focus-visible:ring-offset-0"
+                className="md:w-80 focus-visible:ring-offset-0 "
                 type="phone"
                 id="phone"
                 {...register("phone", { required: true })}
@@ -196,35 +201,10 @@ const SignUp = () => {
             )}
           </div>
 
-          <div className="grid w-full items-center gap-1.5">
-            <Label htmlFor="role">Role:</Label>
-            <Controller
-              name="role"
-              control={control}
-              rules={{ required: "Role is required" }}
-              render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger className="md:w-80 focus-visible:ring-offset-0">
-                    <SelectValue placeholder="Select a Role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="user">User</SelectItem>
-                      <SelectItem value="admin">Admin</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-            {errors?.role && (
-              <p className="text-red-500 text-sm">{errors.role.message}</p>
-            )}
-          </div>
-
           <div>
             <div className="flex items-center space-x-2">
               <input
-                id="terms"
+                id="terms "
                 className="w-4 h-4 rounded  focus:ring-0"
                 type="checkbox"
                 required
@@ -232,11 +212,11 @@ const SignUp = () => {
               />
               <label
                 htmlFor="terms"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-100"
               >
                 Accept{" "}
                 <Link
-                  to="/terms-and-condition"
+                  to="/terms-and-conditions"
                   className="text-orange-500 font-semibold"
                 >
                   Terms & Conditions
@@ -262,13 +242,13 @@ const SignUp = () => {
                 Sign In now!
               </Link>
             </p>
-            <p>
+            <p className="text-gray-100">
               Read our{" "}
               <Link to="/privacy-policy" className="text-orange-500">
                 Privacy Policy
               </Link>{" "}
               and{" "}
-              <Link to="/terms-and-condition" className="text-orange-500">
+              <Link to="/terms-and-conditions" className="text-orange-500">
                 Terms of Service
               </Link>
             </p>

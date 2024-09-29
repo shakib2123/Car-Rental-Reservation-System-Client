@@ -4,7 +4,7 @@ import { RootState } from "../store";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
+    baseUrl: "https://car-rental-reservation-system-ivory.vercel.app/api",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
 
@@ -15,6 +15,6 @@ export const baseApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["cars", "users"],
+  tagTypes: ["cars", "users", "bookings"],
   endpoints: () => ({}),
 });

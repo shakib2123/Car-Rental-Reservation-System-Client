@@ -59,6 +59,14 @@ const carApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["cars"],
     }),
+    returnCar: builder.mutation({
+      query: (data) => ({
+        url: "/cars/return",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["cars", "bookings"],
+    }),
   }),
 });
 
@@ -68,4 +76,5 @@ export const {
   useCreateCarMutation,
   useUpdateCarMutation,
   useDeleteCarMutation,
+  useReturnCarMutation,
 } = carApi;

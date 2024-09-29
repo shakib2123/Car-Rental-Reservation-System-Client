@@ -15,6 +15,7 @@ import {
 } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { routes } from "@/utils/Routes";
+import ThemeSwitcher from "@/utils/ThemeSwitcher";
 import { verifyToken } from "@/utils/verifyToken";
 
 import { Link, NavLink } from "react-router-dom";
@@ -61,7 +62,7 @@ const MobileMenu = () => {
                   <NavLink
                     key={route.path}
                     className={({ isActive }) =>
-                      `font-medium text-gray-100 hover:text-orange-500 uppercase p-2 border-b ${
+                      `font-medium text-gray-900 dark:text-gray-100 hover:text-orange-500 uppercase p-2 border-b ${
                         isActive && "text-orange-500"
                       }`
                     }
@@ -74,7 +75,7 @@ const MobileMenu = () => {
               {verifiedUser?.email && (
                 <NavLink
                   className={({ isActive }) =>
-                    `font-medium text-gray-100 hover:text-orange-500 uppercase p-2 border-b ${
+                    `font-medium text-gray-900 dark:text-gray-100 hover:text-orange-500 uppercase p-2 border-b ${
                       isActive && "text-orange-500"
                     }`
                   }
@@ -100,6 +101,7 @@ const MobileMenu = () => {
                 LOGOUT
               </Button>
             )}
+            <ThemeSwitcher />
           </SheetFooter>
         </SheetContent>
       </Sheet>

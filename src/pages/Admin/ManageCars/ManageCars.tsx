@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ManageCars = () => {
-  const { data: carData, isLoading } = useGetAllCarsQuery(undefined);
+  const { data: carData } = useGetAllCarsQuery(undefined);
 
   const [deleteCar] = useDeleteCarMutation();
 
@@ -42,7 +42,7 @@ const ManageCars = () => {
               icon: "success",
             });
           }
-        } catch (err) {
+        } catch (err: any) {
           Swal.fire({
             text: err?.message,
             icon: "error",
@@ -54,7 +54,7 @@ const ManageCars = () => {
   };
 
   return (
-    <div className="lg:p-8 text-white max-w-screen-xl mx-auto my-8 px-3">
+    <div className="lg:p-8 text-gray-900 dark:text-white max-w-screen-xl mx-auto my-8 px-3">
       <Link to="/admin/create-car">
         <Button className="bg-orange-500 hover:bg-orange-600">
           Add A New Car

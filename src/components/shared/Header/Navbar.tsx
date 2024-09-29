@@ -10,6 +10,7 @@ import {
 } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { verifyToken } from "@/utils/verifyToken";
+import ThemeSwitcher from "@/utils/ThemeSwitcher";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -74,6 +75,7 @@ const Navbar = () => {
               LOGOUT
             </Button>
           )}
+          <ThemeSwitcher />
         </div>
       </div>
     </div>

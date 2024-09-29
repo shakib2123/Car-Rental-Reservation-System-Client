@@ -25,6 +25,15 @@ import BookingConfirmation from "@/pages/BookingConfirmation/BookingConfirmation
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import ForgetPassword from "@/pages/ForgetPassword/ForgetPassword";
 import ChangePassword from "@/pages/ChangePassword/ChangePassword";
+import AboutPage from "@/pages/AboutPage/AboutPage";
+import TermsAndCondition from "@/pages/TermsAndCondition/TermsAndCondition";
+import PrivacyAndPolicy from "@/pages/PrivacyAndPolicy/PrivacyAndPolicy";
+
+import EditProfile from "@/pages/EditProfile/EditProfile";
+import UpdateBooking from "@/pages/User/updateBooking/UpdateBooking";
+import PaymentSummery from "@/pages/User/PaymentSummery/PaymentSummery";
+import PaymentSuccess from "@/pages/PaymentPages/PaymentSuccess";
+import PaymentCancel from "@/pages/PaymentPages/PaymentCancel";
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter([
@@ -56,6 +65,26 @@ export const router: ReturnType<typeof createBrowserRouter> =
         {
           path: "car-lists",
           element: <CarListing />,
+        },
+        {
+          path: "about-us",
+          element: <AboutPage />,
+        },
+        {
+          path: "terms-and-conditions",
+          element: <TermsAndCondition />,
+        },
+        {
+          path: "privacy-policy",
+          element: <PrivacyAndPolicy />,
+        },
+        {
+          path: "payment/success",
+          element: <PaymentSuccess />,
+        },
+        {
+          path: "payment/cancel",
+          element: <PaymentCancel />,
         },
       ],
     },
@@ -92,6 +121,18 @@ export const router: ReturnType<typeof createBrowserRouter> =
         {
           path: "payment-management",
           element: <PaymentManagement />,
+        },
+        {
+          path: "edit-profile",
+          element: <EditProfile />,
+        },
+        {
+          path: "update-booking/:id",
+          element: <UpdateBooking />,
+        },
+        {
+          path: "payment/:id",
+          element: <PaymentSummery />,
         },
       ],
     },

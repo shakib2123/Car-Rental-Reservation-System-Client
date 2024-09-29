@@ -38,6 +38,9 @@ importers:
       '@smastrom/react-rating':
         specifier: ^1.5.0
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@stripe/stripe-js':
+        specifier: ^4.5.0
+        version: 4.5.0
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -921,6 +924,10 @@ packages:
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
+
+  '@stripe/stripe-js@4.5.0':
+    resolution: {integrity: sha512-dMOzc58AOlsF20nYM/avzV8RFhO/vgYTY7ajLMH6mjlnZysnOHZxsECQvjEmL8Q/ukPwHkOnxSPW/QGCCnp7XA==}
+    engines: {node: '>=12.16'}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -2769,6 +2776,8 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  '@stripe/stripe-js@4.5.0': {}
 
   '@types/babel__core@7.20.5':
     dependencies:

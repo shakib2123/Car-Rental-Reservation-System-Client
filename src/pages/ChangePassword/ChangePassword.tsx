@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useResetPasswordMutation } from "@/redux/features/auth/authApi";
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -17,7 +16,6 @@ const ChangePassword = () => {
   // Extract specific query parameters
   const token = searchParams.get("token");
   const id = searchParams.get("id");
-  const [isLinkSent, setIsLinkSent] = useState(false);
 
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
@@ -37,9 +35,8 @@ const ChangePassword = () => {
         token,
         newPassword: data.newPassword,
       });
-      console.log(res);
+
       if (res?.data?.success) {
-        setIsLinkSent(true);
         navigate("/login");
       }
     }

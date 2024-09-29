@@ -83,19 +83,19 @@ const UpdateCar = () => {
         toast.success(res?.data?.message, { id: toastId });
         navigate("/admin/manage-cars");
       }
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err?.data?.message, { id: toastId });
     }
   };
 
   return (
-    <section className="max-w-screen-xl mx-auto min-h-screen flex items-center justify-center px-3 py-8">
+    <section className="max-w-screen-xl mx-auto min-h-screen flex items-center justify-center px-3 py-8 text-gray-900 dark:text-gray-100">
       <div className="shadow-custom-light p-8 rounded-xl">
         <div className="max-w-8 mx-auto flex items-center justify-center mb-6">
-          <Logo />
+          <Logo isDark={true} />
         </div>
 
-        <h3 className="text-2xl font-semibold text-gray-100 text-center mb-8">
+        <h3 className="text-2xl font-semibold  text-center mb-8">
           Update car information!
         </h3>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -105,6 +105,7 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="name">Name:</Label>
                 <Input
+                  defaultValue={car?.data?.name}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="name"
@@ -120,6 +121,7 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="model">Model:</Label>
                 <Input
+                  defaultValue={car?.data?.model}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="model"
@@ -135,6 +137,7 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="year">Year:</Label>
                 <Input
+                  defaultValue={car?.data?.year}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="year"
@@ -150,6 +153,7 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="features">Features:</Label>
                 <Input
+                  defaultValue={car?.data?.features}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="features"
@@ -165,6 +169,7 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="pricePerHour">Price per hour:</Label>
                 <Input
+                  defaultValue={car?.data?.pricePerHour}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="number"
                   id="pricePerHour"
@@ -197,6 +202,7 @@ const UpdateCar = () => {
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="description">Description:</Label>
                 <Input
+                  defaultValue={car?.data?.description}
                   className="md:w-80 focus-visible:ring-offset-0"
                   type="text"
                   id="description"

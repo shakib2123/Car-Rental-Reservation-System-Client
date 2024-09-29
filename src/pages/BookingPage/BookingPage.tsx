@@ -37,7 +37,7 @@ const BookingPage = () => {
     setSearchValue(data.searchValue);
   };
 
-  const { data: carData, isLoading } = useGetAllCarsQuery({
+  const { data: carData } = useGetAllCarsQuery({
     searchValue,
     carType,
     minPrice,

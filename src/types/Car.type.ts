@@ -13,6 +13,7 @@ export type TCar = {
   status: string;
   features: string[];
   pricePerHour: number;
+  totalCost: number;
   isDeleted: boolean;
   createdAt: string;
   updatedAt: string;

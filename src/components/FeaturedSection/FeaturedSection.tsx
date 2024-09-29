@@ -3,7 +3,7 @@ import { TCar } from "@/types/Car.type";
 import CarCard from "../CarCard/CarCard";
 
 const FeaturedSection = () => {
-  const { data: carData, isLoadings } = useGetAllCarsQuery(undefined);
+  const { data: carData } = useGetAllCarsQuery(undefined);
 
   return (
     <section className="pt-16 pb-24 md:py-24">
@@ -17,11 +17,11 @@ const FeaturedSection = () => {
         </p>
         <h2
           data-aos="fade-up"
-          className="text-3xl md:text-4xl text-gray-100 font-bold text-center font-young-serif"
+          className="text-3xl md:text-4xl text-gray-900 dark:text-gray-100 font-bold text-center font-young-serif"
         >
           Our Best Offers
         </h2>
-        <p data-aos="fade-up" className="text-gray-300">
+        <p data-aos="fade-up" className="text-gray-700 dark:text-gray-300 ">
           Take a look at our best deals on high-demand cars. These featured
           vehicles come with outstanding features, competitive pricing, and are
           ready to hit the road whenever you are.
